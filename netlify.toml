@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Official Netlify Next.js runtime — handles SSR, server actions, and middleware.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
