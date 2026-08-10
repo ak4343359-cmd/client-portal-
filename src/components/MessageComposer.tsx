@@ -33,12 +33,12 @@ export default function MessageComposer({
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Write a reply…"
-        className="w-full bg-panel border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand"
+        className="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-sm text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue"
       />
       <div className="flex items-center justify-between mt-2">
         {isStaff ? (
-          <label className="flex items-center gap-2 text-xs text-slate-400">
-            <input type="checkbox" name="internal" className="accent-amber-400" />
+          <label className="flex items-center gap-2 text-xs text-slate-gray">
+            <input type="checkbox" name="internal" className="accent-vibrant-blue" />
             Internal note (hidden from client)
           </label>
         ) : (
@@ -47,7 +47,7 @@ export default function MessageComposer({
         <button
           type="submit"
           disabled={pending || !body.trim()}
-          className="bg-brand hover:bg-teal-300 disabled:opacity-50 text-ink font-semibold rounded-lg px-4 py-1.5 text-sm"
+          className="bg-deep-navy hover:bg-vibrant-blue disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-1.5 text-sm transition-colors"
         >
           {pending ? "Sending…" : "Send"}
         </button>

@@ -32,10 +32,10 @@ export function slaLabel(state: SlaState, t: Ticket): string {
 }
 
 export const SLA_CLASSES: Record<SlaState, string> = {
-  overdue: "bg-red-500/15 text-red-300 border-red-500/30",
-  due_soon: "bg-amber-500/15 text-amber-300 border-amber-500/30",
-  ok: "bg-slate-500/10 text-slate-400 border-slate-500/20",
-  met: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
+  overdue: "bg-[#fce8e6] text-[#c5221f] border-[#f5c6c2]",
+  due_soon: "bg-[#fef7e0] text-[#b06000] border-[#fce8b2]",
+  ok: "bg-surface-container-high text-slate-gray border-outline-variant",
+  met: "bg-[#e6f4ea] text-[#137333] border-[#ceead6]",
   none: "hidden",
 };
 

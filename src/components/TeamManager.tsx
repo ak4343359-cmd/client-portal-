@@ -8,10 +8,13 @@ import { addEmployee, setRole } from "@/app/(portal)/team/actions";
 
 const ROLE_LABEL: Record<Role, string> = { client: "Client", agent: "Agent", admin: "Admin" };
 const ROLE_CLS: Record<Role, string> = {
-  admin: "text-amber-300 border-amber-500/30 bg-amber-500/10",
-  agent: "text-teal-300 border-teal-500/30 bg-teal-500/10",
-  client: "text-slate-300 border-slate-500/30 bg-slate-500/10",
+  admin: "text-[#b06000] border-[#fce8b2] bg-[#fef7e0]",
+  agent: "text-vibrant-blue border-[#d2e3fc] bg-[#e8f0fe]",
+  client: "text-slate-gray border-outline-variant bg-surface-container-high",
 };
+
+const inputCls =
+  "w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-sm text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue";
 
 function AddBtn() {
   const { pending } = useFormStatus();
@@ -19,7 +22,7 @@ function AddBtn() {
     <button
       type="submit"
       disabled={pending}
-      className="bg-brand hover:bg-teal-300 disabled:opacity-60 text-ink font-semibold rounded-lg px-4 py-2 text-sm"
+      className="bg-deep-navy hover:bg-vibrant-blue disabled:opacity-60 text-white font-semibold rounded-lg px-4 py-2 text-sm transition-colors"
     >
       {pending ? "Adding…" : "Add employee"}
     </button>
@@ -39,66 +42,68 @@ export default function TeamManager({
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-1">
-        <h1 className="text-white font-semibold text-xl">Team</h1>
+    <div className="flex flex-col gap-5">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-deep-navy font-bold text-2xl">Team</h1>
+          <p className="text-slate-gray text-sm mt-1">
+            Invite employees and set who is an agent or admin. Clients never appear as assignees.
+          </p>
+        </div>
         <button
           onClick={() => setShowForm((v) => !v)}
-          className="bg-brand hover:bg-teal-300 text-ink font-semibold rounded-lg px-4 py-2 text-sm"
+          className="bg-deep-navy hover:bg-vibrant-blue text-white font-semibold rounded-xl px-5 py-2.5 text-sm transition-colors shadow-sm"
         >
           {showForm ? "Close" : "+ Add employee"}
         </button>
       </div>
-      <p className="text-sm text-slate-400 mb-6">
-        Invite employees and set who is an agent or admin. Clients never appear as assignees.
-      </p>
 
       {!serviceKeySet && (
-        <div className="mb-4 text-sm text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-          ⚠ <strong>SUPABASE_SERVICE_ROLE_KEY</strong> is not set in <code>.env.local</code>, so adding
-          employees and changing roles won&apos;t work yet. Add it and restart the dev server.
+        <div className="text-sm text-[#7a4b00] bg-[#fff7e6] border border-[#fce8b2] rounded-xl p-3">
+          ⚠ <strong>SUPABASE_SERVICE_ROLE_KEY</strong> is not set, so adding employees and changing roles
+          won&apos;t work yet. Add it to your environment and restart.
         </div>
       )}
 
       {showForm && (
-        <form action={formAction} className="bg-panel border border-edge rounded-xl p-4 mb-6 grid sm:grid-cols-2 gap-3">
+        <form action={formAction} className="bg-white border border-surface-variant rounded-xl p-5 grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs uppercase tracking-wide text-slate-500 mb-1">Full name</label>
-            <input name="full_name" placeholder="James Tran" className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand" />
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-gray mb-1">Full name</label>
+            <input name="full_name" placeholder="James Tran" className={inputCls} />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wide text-slate-500 mb-1">Email</label>
-            <input name="email" type="email" required placeholder="james@rdbit.net" className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand" />
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-gray mb-1">Email</label>
+            <input name="email" type="email" required placeholder="james@rdbit.net" className={inputCls} />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wide text-slate-500 mb-1">Temporary password</label>
-            <input name="password" required placeholder="At least 6 characters" className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand" />
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-gray mb-1">Temporary password</label>
+            <input name="password" required placeholder="At least 6 characters" className={inputCls} />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wide text-slate-500 mb-1">Role</label>
-            <select name="role" defaultValue="agent" className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand">
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-gray mb-1">Role</label>
+            <select name="role" defaultValue="agent" className={inputCls}>
               <option value="agent">Agent</option>
               <option value="admin">Admin</option>
             </select>
           </div>
           <div className="sm:col-span-2 flex items-center justify-between gap-3">
             <div className="text-sm">
-              {state?.error && <span className="text-red-400">{state.error}</span>}
-              {state?.message && <span className="text-emerald-300">{state.message}</span>}
+              {state?.error && <span className="text-[#ba1a1a]">{state.error}</span>}
+              {state?.message && <span className="text-[#137333]">{state.message}</span>}
             </div>
             <AddBtn />
           </div>
         </form>
       )}
 
-      <div className="bg-panel border border-edge rounded-xl overflow-hidden">
+      <div className="bg-white border border-surface-variant rounded-xl overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="text-left text-slate-400 border-b border-edge">
+          <thead className="text-left text-slate-gray border-b border-surface-variant bg-canvas">
             <tr>
-              <th className="px-4 py-3 font-medium">Name</th>
-              <th className="px-4 py-3 font-medium hidden sm:table-cell">Email</th>
-              <th className="px-4 py-3 font-medium">Role</th>
-              <th className="px-4 py-3 font-medium text-right">Set role</th>
+              <th className="px-4 py-3 font-semibold">Name</th>
+              <th className="px-4 py-3 font-semibold hidden sm:table-cell">Email</th>
+              <th className="px-4 py-3 font-semibold">Role</th>
+              <th className="px-4 py-3 font-semibold text-right">Set role</th>
             </tr>
           </thead>
           <tbody>
@@ -115,17 +120,17 @@ export default function TeamManager({
 function UserRow({ profile, isSelf, disabled }: { profile: Profile; isSelf: boolean; disabled: boolean }) {
   const [pending, start] = useTransition();
   return (
-    <tr className="border-b border-edge/60 last:border-0">
+    <tr className="border-b border-surface-variant last:border-0 hover:bg-surface-container-low transition-colors">
       <td className="px-4 py-3">
         <div className="flex items-center gap-2">
-          <Avatar name={profile.full_name} color="bg-teal-500/20 text-teal-300" />
-          <span className="text-white">{profile.full_name ?? "—"}</span>
-          {isSelf && <span className="text-[10px] text-slate-500">(you)</span>}
+          <Avatar name={profile.full_name} />
+          <span className="text-deep-navy font-medium">{profile.full_name ?? "—"}</span>
+          {isSelf && <span className="text-[10px] text-slate-gray">(you)</span>}
         </div>
       </td>
-      <td className="px-4 py-3 text-slate-400 hidden sm:table-cell">{profile.email}</td>
+      <td className="px-4 py-3 text-slate-gray hidden sm:table-cell">{profile.email}</td>
       <td className="px-4 py-3">
-        <span className={`text-xs px-2 py-0.5 rounded-full border ${ROLE_CLS[profile.role]}`}>
+        <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${ROLE_CLS[profile.role]}`}>
           {ROLE_LABEL[profile.role]}
         </span>
       </td>
@@ -135,7 +140,7 @@ function UserRow({ profile, isSelf, disabled }: { profile: Profile; isSelf: bool
           disabled={pending || disabled || isSelf}
           onChange={(e) => start(() => setRole(profile.id, e.target.value as Role))}
           title={isSelf ? "You can't change your own role" : undefined}
-          className="bg-panel2 border border-edge rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:border-brand disabled:opacity-50"
+          className="bg-surface-container-low border border-outline-variant rounded-lg px-2 py-1.5 text-sm text-deep-navy focus:outline-none focus:border-vibrant-blue disabled:opacity-50"
         >
           <option value="client">Client</option>
           <option value="agent">Agent</option>

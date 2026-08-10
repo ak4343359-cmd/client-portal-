@@ -26,28 +26,28 @@ export default function RatePage({ params }: { params: { token: string } }) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-canvas">
       <div className="w-full max-w-md fade">
-        <div className="flex items-center gap-3 mb-6 justify-center">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand to-brand2 grid place-items-center text-ink font-extrabold">
-            R
+        <div className="flex items-center justify-center mb-6">
+          <div className="h-12 rounded-xl bg-white border border-surface-variant px-3 flex items-center shadow-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="RDB IT Services" className="h-8 w-auto" />
           </div>
-          <div className="font-extrabold text-white text-lg">RDB IT Services</div>
         </div>
 
-        <div className="bg-panel border border-edge rounded-2xl p-6">
+        <div className="bg-white border border-surface-variant rounded-xl p-6 shadow-sm">
           {done ? (
             <div className="text-center py-6">
               <div className="text-4xl mb-2">🙏</div>
-              <h1 className="text-white font-semibold text-lg">Thank you!</h1>
-              <p className="text-sm text-slate-400 mt-1">
+              <h1 className="text-deep-navy font-bold text-lg">Thank you!</h1>
+              <p className="text-sm text-slate-gray mt-1">
                 Your feedback{picked ? ` (${picked}/5)` : ""} helps us improve.
               </p>
             </div>
           ) : (
             <>
-              <h1 className="text-white font-semibold text-lg">How did we do?</h1>
-              <p className="text-sm text-slate-400 mt-1">
+              <h1 className="text-deep-navy font-bold text-lg">How did we do?</h1>
+              <p className="text-sm text-slate-gray mt-1">
                 Please rate the support you received. 1 = poor, 5 = excellent.
               </p>
               <div className="flex gap-2 mt-4 justify-between">
@@ -56,10 +56,10 @@ export default function RatePage({ params }: { params: { token: string } }) {
                     key={n}
                     disabled={pending}
                     onClick={() => submit(n)}
-                    className={`h-12 flex-1 rounded-lg border text-lg font-semibold transition ${
+                    className={`h-12 flex-1 rounded-lg border text-lg font-semibold transition-colors ${
                       picked === n
-                        ? "bg-brand text-ink border-brand"
-                        : "border-edge text-slate-300 hover:border-brand"
+                        ? "bg-deep-navy text-white border-deep-navy"
+                        : "border-outline-variant text-slate-gray hover:border-vibrant-blue"
                     }`}
                   >
                     {n}
@@ -71,9 +71,9 @@ export default function RatePage({ params }: { params: { token: string } }) {
                 onChange={(e) => setComment(e.target.value)}
                 rows={3}
                 placeholder="Anything else you'd like us to know? (optional)"
-                className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm mt-4 focus:outline-none focus:border-brand"
+                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-sm mt-4 text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue"
               />
-              {error && <p className="text-sm text-red-400 mt-2">{error}</p>}
+              {error && <p className="text-sm text-[#ba1a1a] mt-2">{error}</p>}
             </>
           )}
         </div>

@@ -21,7 +21,7 @@ function SaveButton({
       type="button"
       onClick={onClick}
       disabled={!dirty || pending}
-      className="shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed bg-brand hover:bg-teal-300 text-ink"
+      className="shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed bg-deep-navy hover:bg-vibrant-blue text-white"
     >
       {pending ? "Saving…" : saved && !dirty ? "Saved ✓" : "Save"}
     </button>
@@ -41,7 +41,7 @@ export function StatusSelect({ ticketId, value }: { ticketId: number; value: Sta
         value={sel}
         disabled={pending}
         onChange={(e) => setSel(e.target.value as Status)}
-        className="w-full bg-panel border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand disabled:opacity-60"
+        className="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-sm text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue disabled:opacity-60"
       >
         {STATUS_KEYS.map((s) => (
           <option key={s} value={s}>
@@ -83,7 +83,7 @@ export function AssigneeSelect({
         value={sel}
         disabled={pending}
         onChange={(e) => setSel(e.target.value)}
-        className="w-full bg-panel border border-edge rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand disabled:opacity-60"
+        className="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-sm text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue disabled:opacity-60"
       >
         <option value="">— Unassigned —</option>
         {agents.map((a) => (

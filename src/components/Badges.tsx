@@ -36,7 +36,7 @@ export function SlaBadge({ ticket }: { ticket: Ticket }) {
 export function Avatar({
   name,
   size = "h-7 w-7",
-  color = "bg-slate-700 text-slate-200",
+  color = "bg-deep-navy text-white",
 }: {
   name: string | null | undefined;
   size?: string;

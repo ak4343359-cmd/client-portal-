@@ -85,8 +85,8 @@ export default async function AnalyticsPage() {
 
   return (
     <div>
-      <h1 className="text-white font-semibold text-xl mb-1">Analytics</h1>
-      <p className="text-sm text-slate-400 mb-6">Support performance across all tickets.</p>
+      <h1 className="text-deep-navy font-bold text-2xl mb-1">Analytics</h1>
+      <p className="text-sm text-slate-gray mb-6">Support performance across all tickets.</p>
       <AnalyticsCharts
         kpis={kpis}
         statusDist={statusDist}

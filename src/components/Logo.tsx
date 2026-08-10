@@ -42,7 +42,7 @@ export function Logo({
         </div>
       ) : (
         <div
-          className={`${h} aspect-square rounded-lg bg-gradient-to-br from-brand to-brand2 grid place-items-center text-ink font-extrabold`}
+          className={`${h} aspect-square rounded-lg bg-deep-navy grid place-items-center text-white font-extrabold`}
         >
           R
         </div>

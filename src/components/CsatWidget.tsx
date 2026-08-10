@@ -19,7 +19,7 @@ export default function CsatWidget({
 
   if (done) {
     return (
-      <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-sm text-emerald-200">
+      <div className="bg-[#e6f4ea] border border-[#ceead6] rounded-xl p-4 text-sm text-[#137333]">
         Thanks for your feedback{picked ? ` — you rated ${picked}/5` : ""}.
       </div>
     );
@@ -39,19 +39,19 @@ export default function CsatWidget({
   }
 
   return (
-    <div className="bg-panel border border-edge rounded-xl p-4">
-      <div className="text-sm text-white font-medium">How did we do?</div>
-      <p className="text-xs text-slate-400 mt-0.5">Rate the support you received on this ticket.</p>
+    <div className="bg-white border border-surface-variant rounded-xl p-4">
+      <div className="text-sm text-deep-navy font-semibold">How did we do?</div>
+      <p className="text-xs text-slate-gray mt-0.5">Rate the support you received on this ticket.</p>
       <div className="flex gap-2 mt-3">
         {[1, 2, 3, 4, 5].map((n) => (
           <button
             key={n}
             disabled={pending}
             onClick={() => submit(n)}
-            className={`h-9 w-9 rounded-lg border text-sm font-semibold transition ${
+            className={`h-9 w-9 rounded-lg border text-sm font-semibold transition-colors ${
               picked === n
-                ? "bg-brand text-ink border-brand"
-                : "border-edge text-slate-300 hover:border-brand"
+                ? "bg-deep-navy text-white border-deep-navy"
+                : "border-outline-variant text-slate-gray hover:border-vibrant-blue"
             }`}
           >
             {n}
@@ -63,7 +63,7 @@ export default function CsatWidget({
         onChange={(e) => setComment(e.target.value)}
         rows={2}
         placeholder="Optional comment…"
-        className="w-full bg-panel2 border border-edge rounded-lg px-3 py-2 text-sm mt-3 focus:outline-none focus:border-brand"
+        className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-sm mt-3 text-deep-navy focus:outline-none focus:border-vibrant-blue focus:ring-1 focus:ring-vibrant-blue"
       />
     </div>
   );
