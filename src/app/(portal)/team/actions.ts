@@ -59,6 +59,8 @@ export async function addEmployee(_prev: unknown, formData: FormData): Promise<R
 
 export async function setRole(userId: string, role: Role) {
   await requireAdmin();
+  // Without the service role key, role changes are disabled (the Team page shows a warning).
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) return;
   const admin = createAdminClient();
   await admin.from("profiles").update({ role }).eq("id", userId);
   revalidatePath("/team");
