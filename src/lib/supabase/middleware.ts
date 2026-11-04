@@ -6,8 +6,19 @@ type CookieList = { name: string; value: string; options: CookieOptions }[];
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+  if (!/^https?:\/\//.test(supabaseUrl) || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.error(
+      "Supabase is misconfigured: NEXT_PUBLIC_SUPABASE_URL must be your project URL (https://<ref>.supabase.co) and NEXT_PUBLIC_SUPABASE_ANON_KEY must be set."
+    );
+    return new NextResponse(
+      "The portal is temporarily unavailable due to a configuration error. Please contact support.",
+      { status: 503, headers: { "content-type": "text/plain" } }
+    );
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    supabaseUrl,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
